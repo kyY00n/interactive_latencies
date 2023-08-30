@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Numbers Every Programmer Should Know By Year</title>
+    <title>모든 프로그래머가 알아야하는 연도별 지연시간</title>
     <script src="lib/codemirror.js"></script>
     <script src=lib/xml.js></script>
     <script src=lib/javascript.js></script>
@@ -34,8 +34,6 @@
     </style>
   </head>
   <body>
-    <a href="https://github.com/colin-scott/interactive_latencies"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-
     <iframe id=preview></iframe>
     <textarea id=code name=code>
 <!DOCTYPE html>
@@ -353,30 +351,30 @@
     function getMetrics() {
         var ns = new Metric(1, "ns", "", "ns");
         // Source for L1: http://cache.freescale.com/files/32bit/doc/app_note/AN2180.pdf
-        var L1 = new Metric(3*getCycle(), "ns", "L1 cache reference: ", "L1");
-        var branch = new Metric(10*getCycle(), "ns", "Branch mispredict: ", "branch");
+        var L1 = new Metric(3*getCycle(), "ns", "L1 캐시 참조: ", "L1");
+        var branch = new Metric(10*getCycle(), "ns", "분기 예측 오류(Branch mispredict): ", "branch");
         // Source for L2: http://cache.freescale.com/files/32bit/doc/app_note/AN2180.pdf
-        var L2 = new Metric(13*getCycle(), "ns", "L2 cache reference: ", "L2");
-        var mutex = new Metric(50*getCycle(), "ns", "Mutex lock/unlock: ", "mutex");
+        var L2 = new Metric(13*getCycle(), "ns", "L2 캐시 참조: ", "L2");
+        var mutex = new Metric(50*getCycle(), "ns", "Mutex 잠금/해제: ", "mutex");
         var ns100 = new Metric(100, "ns", "", "ns100", ' = ' + singleBox(blue));
-        var mem = new Metric(getMemLatency(), "100ns", "Main memory reference: ", "mem");
+        var mem = new Metric(getMemLatency(), "100ns", "메인메모리 참조: ", "mem");
         var micro = new Metric(100*10, "100ns", "", "micro");
-        var snappy = new Metric(6000 * getCycle(), "100ns", "Compress 1KB wth Snappy: ",
+        var snappy = new Metric(6000 * getCycle(), "100ns", "1KB 압축 (Snappy로): ",
                                "snappy");
         var tenMicro = new Metric(100*100, "100ns", "", "tenMicro", ' = ' + singleBox(green));
         var network = new Metric(getNICTransmissionDelay(getNetworkPayloadBytes()), "10us",
-              "Send " + addCommas(getNetworkPayloadBytes()) + " bytes over commodity network: ", "network");
-        var ssdRandom = new Metric(getSSDLatency(), "10us", "SSD random read: ", "ssdRandom");
+              "일반 인터넷에서 " + addCommas(getNetworkPayloadBytes()) + " bytes 전송: ", "network");
+        var ssdRandom = new Metric(getSSDLatency(), "10us", "SSD 랜덤 읽기: ", "ssdRandom");
         var mbMem = new Metric(getBusTransmissionDelay(getPayloadBytes()), "10us",
-                                "Read " + addCommas(getPayloadBytes()) + " bytes sequentially from memory: ", "mbMem");
-        var rtt = new Metric(getDCRTT(), "10us", "Round trip in same datacenter: ", "rtt");
+                                "메모리에서 " + addCommas(getPayloadBytes()) + " bytes 순차 읽기: ", "mbMem");
+        var rtt = new Metric(getDCRTT(), "10us", "데이터 센터 내 왕복 시간: ", "rtt");
         var ms = new Metric(100*100*100, "10us", "", "ms", ' = ' + singleBox(red));
         var mbSSD = new Metric(getSSDTransmissionDelay(getPayloadBytes()), "ms",
-                               "Read " + addCommas(getPayloadBytes()) + " bytes sequentially from SSD: ", "mbSSD");
+                               "SSD에서 " + addCommas(getPayloadBytes()) + " bytes 순차 읽기: ", "mbSSD");
         var seek = new Metric(getSeek(), "ms", "Disk seek: ", "seek");
         var mbDisk = new Metric(getDiskTransmissionDelay(getPayloadBytes()), "ms",
-                                "Read " + addCommas(getPayloadBytes()) + " bytes sequentially from disk: ", "mbDisk");
-        var wan = new Metric(getWanRTT(), "ms", "Packet roundtrip CA to Netherlands: ", "wan");
+                                "디스크에서 " + addCommas(getPayloadBytes()) + " bytes 순차 읽기: ", "mbDisk");
+        var wan = new Metric(getWanRTT(), "ms", "캘리포니아-네덜란드 패킷 왕복 시간: ", "wan");
         var metrics = new Array(ns,L1,branch,L2,mutex,ns100,mem,micro,snappy,tenMicro,network,
                                ssdRandom,mbMem,rtt,ms,mbSSD,seek,mbDisk,wan);
         return metrics;
@@ -420,11 +418,11 @@
 
   <body>
     <div class="container-fluid">
-      <h4> Latency Numbers Every Programmer Should Know</h4>
+      <h4> 모든 프로그래머가 알아야하는 지연시간</h4>
       <div class="row-fluid">
         <div class="span7 offset5">
             <input type="text" id="amount" style="border: 0; font-weight: bold;" />
-        </div>
+        </div>래
       </div>
       <div id="slider">
         <div class="row-fluid">
